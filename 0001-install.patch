@@ -1,0 +1,54 @@
+From e13135edf32d7cbf08d4ed9bdb2bce910aef81e1 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Wed, 21 Aug 2024 15:46:54 +0800
+Subject: [PATCH] install
+
+---
+ NewtonFractal.desktop | 11 +++++++++++
+ NewtonFractal.pro     |  9 ++++++++-
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+ create mode 100644 NewtonFractal.desktop
+
+diff --git a/NewtonFractal.desktop b/NewtonFractal.desktop
+new file mode 100644
+index 0000000..9def569
+--- /dev/null
++++ b/NewtonFractal.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=NewtonFractal
++Name=NewtonFractal
++Name[zh_CN]=NewtonFractal
++Icon=NewtonFractal
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=NewtonFractal
++Version=1.6.2
+\ No newline at end of file
+diff --git a/NewtonFractal.pro b/NewtonFractal.pro
+index 9c48fa4..3de7343 100644
+--- a/NewtonFractal.pro
++++ b/NewtonFractal.pro
+@@ -58,9 +58,16 @@ FORMS += \
+ 
+ # Default rules for deployment.
+ qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
++else: unix:!android: #target.path = /opt/$${TARGET}/bin
+ !isEmpty(target.path): INSTALLS += target
+ 
++target.path = $$PREFIX/bin
++desktop.files = NewtonFractal.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons
++icons.files = resources/icons/NewtonFractal.png
++
++INSTALLS += target desktop icons
+ RESOURCES += \
+     resources.qrc
+ 
+-- 
+2.43.4
+

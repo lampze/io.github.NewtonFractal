@@ -1,0 +1,30 @@
+version: "1"
+
+package:
+  id: io.github.NewtonFractal
+  name: NewtonFractal
+  version: 1.6.3.1
+  kind: app
+  description: |
+    Qt application to visualize newton fractals
+
+command:
+  - /opt/apps/io.github.NewtonFractal/files/bin/NewtonFractal
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/chrizbee/NewtonFractal.git
+    version: master
+    commit: 80b3d7267d4ef701d3142773ea12e82ef8c74958
+
+build: |
+  cd /project/linglong/sources/NewtonFractal.git
+  cp resources/icons/icon.png resources/icons/NewtonFractal.png
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
+
